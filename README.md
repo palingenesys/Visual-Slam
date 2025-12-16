@@ -1,2 +1,4 @@
 # Visual-Slam
-VIO slam setup with real sense stereo camera
+
+## 1. Setup
+For setting up the intelsense library follow the instructions reported inside the libsense library readme
