@@ -10,7 +10,7 @@ cd ros2_ws
 git clone https://github.com/realsenseai/librealsense
 ```
 Depending on your operating system, you might follow different instructions for setting up all the required dependencies.
-If you have ubuntu (reccomended to have set it up if not), follow the following link:
+For ubuntu (recommended), follow the instructions in the official realsense link:
 
 ```
 https://github.com/realsenseai/librealsense/blob/master/doc/installation.md
