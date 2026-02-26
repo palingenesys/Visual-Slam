@@ -16,9 +16,9 @@
 ```mermaid
 flowchart LR
     subgraph cam["RealSense D435i"]
-        rgb["RGB stream\n640×360 @ 30 Hz"]
-        depth["Depth stream\naligned to RGB"]
-        imu["IMU\naccel + gyro"]
+        rgb["RGB stream 640×360 @ 30 Hz"]
+        depth["Depth stream aligned to RGB"]
+        imu["IMU accel + gyro"]
     end
 
     rgb    --> odom["rgbd_odometry"]
