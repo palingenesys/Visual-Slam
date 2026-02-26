@@ -122,7 +122,6 @@ private:
       *iy = v.y;
       *iz = v.z;
 
-      // Print ix iy iz values for debugging
       RCLCPP_INFO(get_logger(), "Point %zu: x=%f, y=%f, z=%f", i, *ix, *iy, *iz);
 
       uint8_t r = 0, g = 0, b = 0;

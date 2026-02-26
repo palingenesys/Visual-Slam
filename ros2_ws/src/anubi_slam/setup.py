@@ -10,6 +10,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', ['launch/slam.launch.py']),
+        ('share/' + package_name + '/config', ['config/d435i_slam.rviz']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,6 +26,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'orbslam3_stereo_node = anubi_slam.orbslam3:main',
         ],
     },
 )

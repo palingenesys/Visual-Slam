@@ -1,0 +1,179 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1
+        - /MapCloud1
+      Splitter Ratio: 0.5
+    Tree Height: 600
+  - Class: rviz_common/Views
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    # ── Ground grid ────────────────────────────────────────────────
+    - Alpha: 0.3
+      Cell Size: 0.5
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Name: Grid
+      Plane Cell Count: 20
+      Reference Frame: map
+      Value: true
+
+    # ── TF frames (camera stability check) ─────────────────────────
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 0.3
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Update Interval: 0
+      Value: true
+
+    # ── RTABMap 3-D coloured map ────────────────────────────────────
+    - Class: rtabmap_rviz_plugins/MapCloud
+      Cloud decimation: 4
+      Cloud from scan: false
+      Cloud max depth (m): 4
+      Cloud min depth (m): 0
+      Cloud voxel size (m): 0.01
+      Color Transformer: RGB8
+      Enabled: true
+      Name: MapCloud
+      Style: Points
+      Size (Pixels): 2
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/mapData
+      Value: true
+
+    # ── Pose graph (nodes + loop-closure edges) ─────────────────────
+    - Class: rtabmap_rviz_plugins/MapGraph
+      Enabled: true
+      Global loop closure: 255; 0; 0
+      Local loop closure: 255; 255; 0
+      Neighbor: 0; 0; 255
+      Name: MapGraph
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/mapGraph
+      Value: true
+
+    # ── RTABMap info overlay ────────────────────────────────────────
+    - Class: rtabmap_rviz_plugins/Info
+      Enabled: true
+      Name: Info
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/info
+      Value: true
+
+    # ── 2-D occupancy map ──────────────────────────────────────────
+    - Alpha: 0.6
+      Class: rviz_default_plugins/Map
+      Color Scheme: map
+      Enabled: true
+      Name: OccupancyMap
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/map
+      Value: true
+
+    # ── Local odometry point cloud (what the camera sees NOW) ──────
+    - Class: rviz_default_plugins/PointCloud2
+      Color Transformer: RGB8
+      Decay Time: 0
+      Enabled: true
+      Name: LocalCloud
+      Size (Pixels): 2
+      Style: Points
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/odom_local_map
+      Value: true
+
+    # ── Camera trajectory path ─────────────────────────────────────
+    - Class: rviz_default_plugins/Path
+      Color: 0; 255; 0
+      Enabled: true
+      Name: Trajectory
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rtabmap/mapPath
+      Value: true
+
+    # ── Live RGB image ─────────────────────────────────────────────
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: RGBImage
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /camera/color/image_raw
+      Value: true
+
+  Enabled: true
+  Global Options:
+    Background Color: 30; 30; 30
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 3.0
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.5
+      Target Frame: map
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 3.14
+    Saved: ~
+Window Geometry:
+  Height: 900
+  Width: 1400
+  X: 50
+  Y: 50
