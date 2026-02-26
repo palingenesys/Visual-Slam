@@ -56,13 +56,6 @@ rs-enumerate-devices
 ```bash
 cd ~/path/to/Visual-Slam/ros2_ws
 
-# Exclude source realsense (use system-installed version)
-touch src/realsense-ros/COLCON_IGNORE
-
-# Remove broken stubs if present
-rm -rf install/realsense2_camera install/realsense2_camera_msgs \
-       install/realsense2_description install/realsense2_ros_mqtt_bridge
-
 colcon build --packages-select point_cloud anubi_slam
 source install/setup.bash
 ```
