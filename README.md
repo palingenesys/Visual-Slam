@@ -5,7 +5,7 @@
 | Component | Details |
 |---|---|
 | Camera | Intel RealSense D435i (USB 3) |
-| ROS 2 | Jazzy |
+| ROS 2 | Jazzy/Humble |
 | SLAM | RTAB-Map 4.56 |
 | Packages | `realsense2_camera`, `rtabmap_ros`, `imu_filter_madgwick` |
 
