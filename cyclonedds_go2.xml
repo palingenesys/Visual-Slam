@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  CycloneDDS configuration for Unitree Go2 deployment.
+  Compatible with CycloneDDS 0.9.x / 0.10.x (ROS2 Humble).
+
+  USAGE:
+    export CYCLONEDDS_URI=file:///config/cyclonedds_go2.xml
+    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    export ROS_DOMAIN_ID=0
+
+  NETWORK INTERFACE:
+    Change the `name` attribute of <NetworkInterface> to match the interface
+    the Jetson uses to reach the other machines:
+      eth0   — Go2 internal Ethernet (192.168.123.x)
+      wlan0  — WiFi
+    Find the right one with: ip route get <laptop_ip>
+-->
+<CycloneDDS
+  xmlns="https://cdds.io/config"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://cdds.io/config
+    https://raw.githubusercontent.com/eclipse-cyclonedds/cyclonedds/master/etc/cyclonedds.xsd">
+
+  <Domain id="any">
+
+    <General>
+      <!-- New-style interface config (replaces deprecated NetworkInterfaceAddress) -->
+      <!-- Interface name is substituted at container startup from $DDS_INTERFACE env var -->
+      <Interfaces>
+        <NetworkInterface name="${DDS_INTERFACE}" multicast="true" />
+      </Interfaces>
+      <AllowMulticast>true</AllowMulticast>
+      <!-- Increase for large PointCloud2 / mapData messages -->
+      <MaxMessageSize>65500B</MaxMessageSize>
+      <FragmentSize>4000B</FragmentSize>
+    </General>
+
+    <Discovery>
+      <ParticipantIndex>auto</ParticipantIndex>
+      <MaxAutoParticipantIndex>50</MaxAutoParticipantIndex>
+      <!--
+        Uncomment if multicast is blocked (point-to-point link):
+        <Peers>
+          <Peer Address="192.168.123.100"/>
+        </Peers>
+      -->
+    </Discovery>
+
+    <Internal>
+      <Watermarks>
+        <!-- High-water mark for writer history cache (default is 500kB) -->
+        <WhcHigh>8MB</WhcHigh>
+      </Watermarks>
+    </Internal>
+
+    <Tracing>
+      <Verbosity>warning</Verbosity>
+      <OutputFile>stdout</OutputFile>
+    </Tracing>
+
+  </Domain>
+</CycloneDDS>

@@ -189,6 +189,55 @@ If `map → odom` is missing, RTAB-Map has not initialised yet (wait for `qualit
 
 ---
 
+## Go2 Deployment — Network Setup
+
+### Connecting laptop to Go2 Jetson via Ethernet
+
+The Go2 Jetson has a **static IP of `192.168.123.18`** on its internal Ethernet (`eth0`).
+When you connect your laptop directly via Ethernet cable, the laptop's interface will be on a **different subnet** (e.g. `10.42.0.1/24` from NetworkManager's shared connection).
+
+To SSH into the Jetson and install packages, the Jetson must get an IP on the laptop's shared subnet:
+
+```bash
+# On the Jetson — request DHCP from laptop's shared connection
+sudo dhclient eth0
+
+# Verify assigned IP (look for 10.42.0.x)
+ip addr show eth0
+
+# SSH from laptop using the new DHCP address
+ssh unitree@10.42.0.<assigned>     # password: 123
+```
+
+> The Jetson will have **two IPs** on eth0: its static `192.168.123.18` and the DHCP `10.42.0.x`.
+> Use `10.42.0.x` for SSH and internet access through the laptop.
+> Use `192.168.123.18` for Go2-internal DDS communication.
+
+### Switching to WiFi
+
+When the Go2 connects to WiFi, the Jetson's IP address **changes** — it will no longer be `192.168.123.18` (which is only valid on the internal Ethernet link).
+
+Find the new WiFi IP:
+```bash
+# On the Jetson
+ip addr show wlan0    # or the relevant WiFi interface
+```
+
+Update any hardcoded references:
+- SSH: `ssh unitree@<new_wifi_ip>`
+- CycloneDDS peer list in `cyclonedds_go2.xml` (if using unicast)
+- `DDS_INTERFACE` env var → change from `eth0` to `wlan0`
+
+```bash
+# Run with WiFi interface
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export DDS_INTERFACE=wlan0
+export ROS_DOMAIN_ID=0
+ros2 launch anubi_slam slam_go2.launch.py
+```
+
+---
+
 ## Troubleshooting
 
 ### `quality=0` — odometry tracking fails
